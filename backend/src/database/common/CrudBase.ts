@@ -73,19 +73,22 @@ export class Crud<T> {
             this.mock.sort((a: any, b: any) => a.id - b.id);
             const lastRegister: any = this.mock[this.mock.length - 1];
 
-            const position = this.mock.push({ ...values, id: lastRegister.id + 1 });
+            if (!lastRegister && this.mock.length > 0) return { error: 'Not created' };
+
+            const position = this.mock.push({ ...values, id: (lastRegister?.id || 0) + 1 });
             if (!position) return { error: 'Not created' };
 
-            return lastRegister.id + 1;
-        }
+            return (lastRegister?.id || 0) + 1;
+        } else {
 
-        try {
-            return await knex(this.tableName)
-                .insert(values)
-                .returning('id')
-                .first();
-        } catch (error) {
-            return { error };
+            try {
+                return await knex(this.tableName)
+                    .insert(values)
+                    .returning('id')
+                    .first();
+            } catch (error) {
+                return { error };
+            }
         }
     }
 

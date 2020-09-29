@@ -1,3 +1,4 @@
+import { randomize } from "../../../../services";
 import { Crud } from "../../../common/CrudBase";
 import { IStudent } from "../IStudent";
 
@@ -16,6 +17,15 @@ export class CreateStudentProvider {
      * Method that allow create a new record in student table
      */
     async create(student: Omit<IStudent, 'id' | 'ra'>): Promise<number | { error: any }> {
-        throw new Error("Not implemented");
+
+        if (!student.email) return { error: 'Invalid field: \'email\'' };
+        if (!student.name) return { error: 'Invalid field: \'name\'' };
+        if (!student.cpf) return { error: 'Invalid field: \'Cpf\'' };
+
+        return this.entity.create({
+            ...student,
+            id: null,
+            ra: randomize(1, 100)
+        });
     }
 }
