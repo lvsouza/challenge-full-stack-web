@@ -1,1 +1,1 @@
-export { CreateStudentProvider, Student } from './create-student/CreateStudentProvider';
+export { CreateStudentProvider } from './student/create-student/CreateStudentProvider';
