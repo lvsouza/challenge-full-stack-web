@@ -11,6 +11,7 @@
         * Express
         * Dotenv
         * Jest
+        * Jest
         * Knex
         * Pg
 
@@ -28,3 +29,9 @@
 
 
 *  Frontend
+
+    * 
+
+## Execução
+
+* 
