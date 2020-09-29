@@ -5,7 +5,7 @@ export interface IStudent {
     /**
      * Table identifier
      */
-    id: number;
+    id: number | null;
     /**
      * Academic Record
      */

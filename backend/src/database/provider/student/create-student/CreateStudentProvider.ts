@@ -15,7 +15,7 @@ export class CreateStudentProvider {
     /**
      * Method that allow create a new record in student table
      */
-    async create(student: IStudent): Promise<number> {
+    async create(student: Omit<IStudent, 'id' | 'ra'>): Promise<number | { error: any }> {
         throw new Error("Not implemented");
     }
 }
