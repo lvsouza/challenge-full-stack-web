@@ -1,3 +1,5 @@
+import Knex from "knex";
+import { Result } from "../../types/Result";
 import { TableNames } from "../TableNames";
 import knex from './../connection';
 
@@ -28,36 +30,43 @@ export class Crud<T> {
      * Return a `T` register
      * @param id `T` identifier
      */
-    async getById(id: number): Promise<T | { error: any }> {
+    async getById(id: number): Promise<Result<any, any>> {
 
         if (this.test) {
             const register = this.mock.find((register: any) => register.id === id)
-            if (!register) return { error: 'Not found' };
+            if (!register) {
+                return { error: 'Not found' };
+            }
 
-            return register;
-        }
+            return { result: register };
+        } else {
 
-        try {
-            return await knex(this.tableName)
-                .select('*')
-                .where(id)
-                .first();
-        } catch (error) {
-            return { error };
+            try {
+                const result = await knex(this.tableName)
+                    .select('*')
+                    .where(id)
+                    .first();
+
+                return { result };
+            } catch (error) {
+                return { error };
+            }
+
         }
     }
+
+    // { error: 'Not found' }
 
     /**
      * Return a `T` array 
      */
-    async getAll(): Promise<T[] | { error: any }> {
-
+    async getAll(): Promise<Result<T[]>> {
         if (this.test) {
-            return this.mock;
+            return { result: this.mock };
         }
 
         try {
-            return await knex(this.tableName).select('*');
+            return { result: await knex(this.tableName).select('*') };
         } catch (error) {
             return { error };
         }
@@ -67,8 +76,7 @@ export class Crud<T> {
      * Create a new `T` register
      * @param values entity `T`
      */
-    async create(values: T): Promise<number | { error: any }> {
-
+    async create(values: T): Promise<Result<number>> {
         if (this.test) {
             this.mock.sort((a: any, b: any) => a.id - b.id);
             const lastRegister: any = this.mock[this.mock.length - 1];
@@ -78,15 +86,17 @@ export class Crud<T> {
             const position = this.mock.push({ ...values, id: (lastRegister?.id || 0) + 1 });
             if (!position) return { error: 'Not created' };
 
-            return (lastRegister?.id || 0) + 1;
+            return { result: (lastRegister?.id || 0) + 1 };
         } else {
 
             try {
-                return await knex(this.tableName)
-                    .insert(values)
-                    .returning('id')
-                    .first();
+                return {
+                    result: Number((await knex(this.tableName)
+                        .insert({ ...values, id: undefined })
+                        .returning('id')).shift()),
+                }
             } catch (error) {
+                console.log(error)
                 return { error };
             }
         }
@@ -97,7 +107,7 @@ export class Crud<T> {
      * @param id `T` identifier
      * @param values entity `T`
      */
-    async update(id: number, values: Partial<T>): Promise<void | { error: any }> {
+    async update(id: number, values: Partial<T>): Promise<Result<void>> {
 
         if (this.test) {
             let register = this.mock.find((register: any) => register.id === id)
@@ -111,16 +121,18 @@ export class Crud<T> {
 
             const index = this.mock.findIndex((register: any) => register.id === id);
             this.mock.splice(index, 1, register);
-        }
-
-        try {
-            await knex(this.tableName)
-                .update({ ...values })
-                .where(id);
 
             return;
-        } catch (error) {
-            return { error };
+        } else {
+            try {
+                await knex(this.tableName)
+                    .update({ ...values })
+                    .where(id);
+
+                return;
+            } catch (error) {
+                return { error };
+            }
         }
     }
 
@@ -128,23 +140,28 @@ export class Crud<T> {
      * Delete a `T` register
      * @param id `T` identifier
      */
-    async delete(id: number): Promise<void | { error: any }> {
-
+    async delete(id: number): Promise<Result<void>> {
         if (this.test) {
             const indexToRemove = this.mock.findIndex((register: any) => register.id === id);
             if (indexToRemove < 0) return { error: 'Not found' };
 
             this.mock.splice(indexToRemove, 1);
-        }
-
-        try {
-            await knex(this.tableName)
-                .where(id)
-                .delete();
 
             return;
-        } catch (error) {
-            return { error };
+        } else {
+            try {
+                await knex(this.tableName)
+                    .where(id)
+                    .delete();
+
+                return;
+            } catch (error) {
+                return { error };
+            }
         }
+    }
+
+    async customKnexQuery<Type = any>(fn: (knex: Knex) => Promise<Type>): Promise<Type> {
+        return await fn(knex);
     }
 }

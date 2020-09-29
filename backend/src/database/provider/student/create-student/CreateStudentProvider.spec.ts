@@ -15,7 +15,7 @@ describe('Register student', () => {
             cpf: '000.000.000-00',
         }
 
-        expect(await CreateStudent.create(student)).toEqual(1);
+        expect(await CreateStudent.create(student)).toMatchObject({ result: 1 });
     });
 
     test('Add new student 2', async () => {
@@ -25,7 +25,7 @@ describe('Register student', () => {
             cpf: '000.000.000-00',
         }
 
-        expect(await CreateStudent.create(student)).toEqual(2);
+        expect(await CreateStudent.create(student)).toMatchObject({ result: 2 });
     });
 
     test('Student without email', async () => {
@@ -35,7 +35,7 @@ describe('Register student', () => {
             cpf: '000.000.000-00',
         }
 
-        expect(((await CreateStudent.create(student) as any)).error).toBeTruthy();
+        expect((await CreateStudent.create(student)).error).toBeTruthy();
     });
 
     test('Student without name', async () => {
@@ -45,9 +45,9 @@ describe('Register student', () => {
             cpf: '000.000.000-00',
         }
 
-        expect(((await CreateStudent.create(student) as any)).error).toBeTruthy();
+        expect((await CreateStudent.create(student)).error).toBeTruthy();
     });
-    
+
     test('Student without cpf', async () => {
         const student: Omit<IStudent, 'id' | 'ra'> = {
             email: 'aluno@aluno.com',
@@ -55,6 +55,6 @@ describe('Register student', () => {
             cpf: '',
         }
 
-        expect(((await CreateStudent.create(student) as any)).error).toBeTruthy();
+        expect((await CreateStudent.create(student)).error).toBeTruthy();
     });
 });
