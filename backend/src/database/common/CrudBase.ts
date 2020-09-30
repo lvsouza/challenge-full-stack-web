@@ -122,13 +122,12 @@ export class Crud<T> {
             return { result: register } as any;
         } else {
             try {
-                const register = await knex(this.tableName)
-                    .update({ ...values })
-                    .returning('*')
-                    .where(id)
-                    .first();
+                const registers = await knex(this.tableName)
+                        .update({ ...values, id })
+                        .where('id', id)
+                        .returning('*');
 
-                return { result: register } as any;
+                return { result: registers.shift() } as any;
             } catch (error) {
                 return { error } as any;
             }
