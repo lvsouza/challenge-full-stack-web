@@ -19,6 +19,10 @@ export class UpdateStudentProvider {
      * @return IStudent | error - Student updated
      */
     async update(id: number, student: Omit<IStudent, 'cpf' | 'id' | 'ra'>): Promise<Result<IStudent>> {
-        throw new Error("Not implemented");
+
+        if (!student.email) return { error: 'Invalid field: \'email\'' };
+        if (!student.name) return { error: 'Invalid field: \'name\'' };
+
+        return await this.entity.update(id, student);;
     }
 }

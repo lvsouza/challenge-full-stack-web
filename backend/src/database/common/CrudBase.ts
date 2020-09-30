@@ -104,11 +104,11 @@ export class Crud<T> {
      * @param id `T` identifier
      * @param values entity `T`
      */
-    async update(id: number, values: Partial<T>): Promise<Result<void>> {
+    async update(id: number, values: Partial<T>): Promise<Result<T>> {
 
         if (this.test) {
             let register = this.mock.find((register: any) => register.id === id)
-            if (!register) return { error: 'Not found' };
+            if (!register) return { error: 'Not found' } as any;
 
             register = {
                 ...register,
@@ -119,16 +119,18 @@ export class Crud<T> {
             const index = this.mock.findIndex((register: any) => register.id === id);
             this.mock.splice(index, 1, register);
 
-            return;
+            return { result: register } as any;
         } else {
             try {
-                await knex(this.tableName)
+                const register = await knex(this.tableName)
                     .update({ ...values })
-                    .where(id);
+                    .returning('*')
+                    .where(id)
+                    .first();
 
-                return;
+                return { result: register } as any;
             } catch (error) {
-                return { error };
+                return { error } as any;
             }
         }
     }
