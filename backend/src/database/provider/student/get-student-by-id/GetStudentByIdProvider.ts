@@ -17,6 +17,6 @@ export class GetStudentByIdProvider {
      * Method that allow get a record by id in student table
      */
     async getById(id: number): Promise<Result<IStudent>> {
-        throw new Error("Not implemented");
+        return await this.entity.getById(id);
     }
 }

@@ -30,15 +30,15 @@ export class Crud<T> {
      * Return a `T` register
      * @param id `T` identifier
      */
-    async getById(id: number): Promise<Result<any, any>> {
+    async getById(id: number): Promise<Result<T, any>> {
 
         if (this.test) {
             const register = this.mock.find((register: any) => register.id === id)
             if (!register) {
-                return { error: 'Not found' };
+                return { error: 'Not found' } as any;
             }
 
-            return { result: register };
+            return { result: register } as any;
         } else {
 
             try {
@@ -47,15 +47,12 @@ export class Crud<T> {
                     .where(id)
                     .first();
 
-                return { result };
+                return { result } as any;
             } catch (error) {
-                return { error };
+                return { error } as any;
             }
-
         }
     }
-
-    // { error: 'Not found' }
 
     /**
      * Return a `T` array 
