@@ -23,9 +23,7 @@ export class GetAllStudentsController {
 
         return responseHandler(res, {
             statusCode: HttpStatusCode.StatusCodes.OK,
-            data: {
-                students: allStudents.result
-            },
+            data: [...allStudents.result],
         });
     }
 }

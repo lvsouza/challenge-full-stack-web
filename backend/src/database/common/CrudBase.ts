@@ -43,8 +43,8 @@ export class Crud<T> {
 
             try {
                 const result = await knex(this.tableName)
+                    .where('id', id)
                     .select('*')
-                    .where(id)
                     .first();
 
                 return { result } as any;
