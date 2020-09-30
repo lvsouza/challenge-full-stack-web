@@ -2,7 +2,6 @@ import { Result } from "../../../../types/Result";
 import { randomize } from "../../../../services";
 import { Crud } from "../../../common/CrudBase";
 import { IStudent } from "../IStudent";
-import { TableNames } from "../../../TableNames";
 
 /**
  * Class to create a new student
