@@ -43,7 +43,7 @@ export class UpdateStudentController {
         }
 
         return responseHandler(res, {
-            statusCode: HttpStatusCode.StatusCodes.CREATED,
+            statusCode: HttpStatusCode.StatusCodes.OK,
             data: { ...updatedStudent.result },
         });
     }

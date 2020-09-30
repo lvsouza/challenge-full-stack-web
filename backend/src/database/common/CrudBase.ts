@@ -123,7 +123,7 @@ export class Crud<T> {
         } else {
             try {
                 const registers = await knex(this.tableName)
-                    .update({ ...values, id })
+                    .update({ ...values })
                     .where('id', id)
                     .returning('*');
 
