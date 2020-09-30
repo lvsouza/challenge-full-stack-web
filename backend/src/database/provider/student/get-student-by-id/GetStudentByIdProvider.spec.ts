@@ -1,12 +1,12 @@
-import { GetAllStudentsProvider } from "./GetAllStudentsProvider";
+import { GetStudentByIdProvider } from "./GetStudentByIdProvider";
 import { TableNames } from "../../../TableNames";
 import { Crud } from "../../../common";
 import { IStudent } from "../IStudent";
 
 
-describe('Get all students', () => {
+describe('Get a student by their id', () => {
     const StudentCrudTest = new Crud<IStudent>(TableNames.student, true);
-    const getAllStudentsProvider = new GetAllStudentsProvider(StudentCrudTest);
+    const getStudentByIdProvider = new GetStudentByIdProvider(StudentCrudTest);
 
     beforeAll(async () => {
         const student1: IStudent = {
@@ -26,10 +26,13 @@ describe('Get all students', () => {
             id: null,
         }
         StudentCrudTest.create(student2);
-
     });
 
-    test('Validing 2 new students', async () => {
-        expect((await getAllStudentsProvider.getAll()).result?.length).toBe(2);
+    test('Validing students 1', async () => {
+        expect((await getStudentByIdProvider.getById(1)).result?.id).toBe(1);
+    });
+
+    test('Validing students 2', async () => {
+        expect((await getStudentByIdProvider.getById(2)).result?.id).toBe(2);
     });
 });
