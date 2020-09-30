@@ -17,6 +17,6 @@ export class DeleteStudentByIdProvider {
      * Method that allow get a record by id in student table
      */
     async deleteById(id: number): Promise<Result<boolean>> {
-        throw new Error("Not implemented");
+        return await this.entity.delete(id);
     }
 }

@@ -31,9 +31,9 @@ describe('Get a student by their id', () => {
     test('Deleting student 1', async () => {
         expect((await deleteStudentByIdProvider.deleteById(1)).result).toBe(true);
     })
-    
+
     test('Deleting student 1 again', async () => {
-        expect((await deleteStudentByIdProvider.deleteById(1)).result).toBe(false);
+        expect((await deleteStudentByIdProvider.deleteById(1)).error).toBeTruthy();
     })
 
     test('Deleting student 2', async () => {
@@ -41,10 +41,10 @@ describe('Get a student by their id', () => {
     });
 
     test('Deleting student 2 again', async () => {
-        expect((await deleteStudentByIdProvider.deleteById(2)).result).toBe(false);
+        expect((await deleteStudentByIdProvider.deleteById(2)).error).toBeTruthy();
     });
 
     test('Deleting student that does not exist ', async () => {
-        expect((await deleteStudentByIdProvider.deleteById(5)).result).toBe(false);
+        expect((await deleteStudentByIdProvider.deleteById(5)).error).toBeTruthy();
     });
 });

@@ -123,9 +123,9 @@ export class Crud<T> {
         } else {
             try {
                 const registers = await knex(this.tableName)
-                        .update({ ...values, id })
-                        .where('id', id)
-                        .returning('*');
+                    .update({ ...values, id })
+                    .where('id', id)
+                    .returning('*');
 
                 return { result: registers.shift() } as any;
             } catch (error) {
@@ -138,21 +138,21 @@ export class Crud<T> {
      * Delete a `T` register
      * @param id `T` identifier
      */
-    async delete(id: number): Promise<Result<void>> {
+    async delete(id: number): Promise<Result<boolean>> {
         if (this.test) {
             const indexToRemove = this.mock.findIndex((register: any) => register.id === id);
             if (indexToRemove < 0) return { error: 'Not found' };
 
             this.mock.splice(indexToRemove, 1);
 
-            return;
+            return { result: true };
         } else {
             try {
                 await knex(this.tableName)
                     .where(id)
                     .delete();
 
-                return;
+                return { result: true };
             } catch (error) {
                 return { error };
             }
