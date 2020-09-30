@@ -17,6 +17,6 @@ export class GetAllStudentsProvider {
      * Method that allow get all records in student table
      */
     async getAll(): Promise<Result<IStudent[]>> {
-        throw new Error("Not implemented");
+        return await this.entity.getAll();
     }
 }
