@@ -148,11 +148,11 @@ export class Crud<T> {
             return { result: true };
         } else {
             try {
-                await knex(this.tableName)
+                const res = await knex(this.tableName)
                     .where('id', id)
                     .delete();
 
-                return { result: true };
+                return { result: res === 1 ? true : false };
             } catch (error) {
                 return { error };
             }
