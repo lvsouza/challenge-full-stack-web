@@ -149,7 +149,7 @@ export class Crud<T> {
         } else {
             try {
                 await knex(this.tableName)
-                    .where(id)
+                    .where('id', id)
                     .delete();
 
                 return { result: true };
