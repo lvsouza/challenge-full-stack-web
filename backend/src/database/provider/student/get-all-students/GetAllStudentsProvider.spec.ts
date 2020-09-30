@@ -16,7 +16,7 @@ describe('Get all students', () => {
             ra: 123456,
             id: null,
         }
-        StudentCrudTest.create(student1);
+        await StudentCrudTest.create(student1);
 
         const student2: IStudent = {
             email: 'aluno2@aluno.com',
@@ -25,7 +25,7 @@ describe('Get all students', () => {
             ra: 78910,
             id: null,
         }
-        StudentCrudTest.create(student2);
+        await StudentCrudTest.create(student2);
 
     });
 
