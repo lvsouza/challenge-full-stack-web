@@ -160,6 +160,10 @@ export class Crud<T> {
     }
 
     async customKnexQuery<Type = any>(fn: (knex: Knex) => Promise<Type>): Promise<Type> {
-        return await fn(knex);
+        if (this.test) {
+            return new Promise(resolve => resolve());
+        } else {
+            return await fn(knex);
+        }
     }
 }

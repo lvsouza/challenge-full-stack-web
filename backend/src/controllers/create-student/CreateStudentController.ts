@@ -13,12 +13,13 @@ export class CreateStudentController {
         body: Joi.object({
             cpf: Joi.string().regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/).required(),
             email: Joi.string().email().max(100).min(3).required(),
+            ra: Joi.number().required().min(100).max(9999999999),
             name: Joi.string().max(100).min(2).required(),
         }),
     }, { abortEarly: false });
 
     async execute({ body }: Request<any, any, Omit<IStudent, 'id'>>, res: Response): Promise<Response> {
-        const { name, cpf, email } = body;
+        const { name, cpf, email, ra } = body;
 
         if (!name || !cpf || !email) {
             return responseHandler(res, {
@@ -29,9 +30,17 @@ export class CreateStudentController {
         }
 
         const createStudentProvider = new CreateStudentProvider(new Crud<IStudent>(TableNames.student));
-        const createdStudent = await createStudentProvider.create({ name, cpf, email });
+        const { result, error } = await createStudentProvider.create({ name, cpf, email, ra });
 
-        if (!createdStudent.result) {
+        if (!result && error) {
+            return responseHandler(res, {
+                error: HttpStatusCode.getStatusText(HttpStatusCode.StatusCodes.BAD_REQUEST),
+                statusCode: HttpStatusCode.StatusCodes.BAD_REQUEST,
+                message: error,
+            });
+        }
+
+        if (!result) {
             return responseHandler(res, {
                 error: HttpStatusCode.getStatusText(HttpStatusCode.StatusCodes.BAD_REQUEST),
                 statusCode: HttpStatusCode.StatusCodes.BAD_REQUEST,
@@ -42,7 +51,7 @@ export class CreateStudentController {
         return responseHandler(res, {
             statusCode: HttpStatusCode.StatusCodes.CREATED,
             data: {
-                id: createdStudent.result
+                id: result
             },
         });
     }
