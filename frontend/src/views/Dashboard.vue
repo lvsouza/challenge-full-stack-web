@@ -1,6 +1,6 @@
 <template>
   <div>
-    Dashboard
+    Página inicial
   </div>
 </template>
 

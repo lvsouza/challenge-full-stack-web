@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       items: [
-        { title: "Dashboard", icon: "mdi-view-dashboard", path: "/" },
+        { title: "Página inicial", icon: "mdi-view-dashboard", path: "/" },
         { title: "Alunos", icon: "mdi-book", path: "/alunos" },
       ],
     };

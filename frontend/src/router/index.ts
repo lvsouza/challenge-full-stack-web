@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 
 import StudentsDetail from '../views/students/StudentsDetail.vue';
-import Students from '../views/students/Students.vue';
+import StudentsPage from '../views/students/Students.vue';
 import Dashboard from '../views/Dashboard.vue';
 
 Vue.use(VueRouter);
@@ -17,7 +17,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/alunos',
-    component: Students,
+    component: StudentsPage,
     meta: {
       title: 'Consulta de alunos',
     }
