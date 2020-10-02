@@ -1,5 +1,5 @@
 import Axios from 'axios';
 
 export const ApiConfig = Axios.create({
-    baseURL: 'http://localhost:3333/api'
+    baseURL: 'http://localhost:3333/api',
 });
