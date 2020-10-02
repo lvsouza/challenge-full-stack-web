@@ -12,25 +12,52 @@ interface IGetStudent {
 }
 
 export const GetStudent: IGetStudent = {
-    async create(student: IStudent): Promise<Result<IStudent>> {
-        throw new Error("Not implemented");
+    async create(student: Omit<IStudent, 'id'>): Promise<Result<IStudent>> {
+        try {
+            const { data: { data, error } } = await ApiConfig.post<IApiResponse<IStudent>>('/student', student);
+            if (!error) {
+                return { result: data };
+            } else {
+                return { error: 'Hove um erro ao cadastrar o aluno!' };
+            }
+        } catch (error) {
+            return { error: 'Hove um erro ao cadastrar o aluno!' }
+        }
     },
-    async update(id: number, student: IStudent): Promise<Result<IStudent>> {
-        throw new Error("Not implemented");
+    async update(id: number, student: Omit<IStudent, 'id' | 'ra' | 'cpf'>): Promise<Result<IStudent>> {
+        try {
+            const { data: { data, error } } = await ApiConfig.put<IApiResponse<IStudent>>('/student/' + id, student);
+            if (!error) {
+                return { result: data };
+            } else {
+                return { error: 'Hove um erro na atualização do aluno!' };
+            }
+        } catch (error) {
+            return { error: 'Hove um erro na atualização do aluno!' }
+        }
     },
     async getById(id: number): Promise<Result<IStudent>> {
-        throw new Error("Not implemented");
+        try {
+            const { data: { data, error } } = await ApiConfig.get<IApiResponse<IStudent>>('/student/' + id);
+            if (!error) {
+                return { result: data };
+            } else {
+                return { error: 'Hove um erro na consulta!' };
+            }
+        } catch (error) {
+            return { error: 'Hove um erro na consulta!' }
+        }
     },
     async delete(id: number): Promise<Result<boolean>> {
         try {
             const { data: { data, error } } = await ApiConfig.delete<IApiResponse<boolean>>('/student/' + id);
             if (!error) {
-                return { result: data };
+                return { result: true };
             } else {
-                return { error: 'Hove um erro ao realizar tentar apagar o registro!' };
+                return { error: 'Hove um erro ao tentar apagar o aluno!' };
             }
         } catch (error) {
-            return { error: 'Hove um erro ao realizar tentar apagar o registro!' }
+            return { error: 'Hove um erro ao tentar apagar o aluno!' }
         }
     },
     async getAll(): Promise<Result<IStudent[]>> {

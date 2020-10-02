@@ -40,7 +40,7 @@ const router = new VueRouter(
 );
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title
+  document.title = to.meta.title + ' - Módulo acadêmico'
   next()
 });
 
