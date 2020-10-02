@@ -1,27 +1,28 @@
 import { IApiResponse } from '../IApiResponse';
-import { Result } from './../../types/Result';
+import { Result } from '../../types/Result';
 import { ApiConfig } from '../ApiConfigs';
 import { IStudent } from './IStudents';
 
 interface IGetStudent {
-    update(id: number, student: IStudent): Promise<Result<IStudent, string>>;
-    create(student: IStudent): Promise<Result<IStudent, string>>;
+    update(id: number, student: Omit<IStudent, 'id' | 'ra' | 'cpf'>): Promise<Result<IStudent, string>>;
+    create(student: Omit<IStudent, 'id'>): Promise<Result<IStudent, string>>;
     getById(id: number): Promise<Result<IStudent, string>>;
     delete(id: number): Promise<Result<boolean, string>>;
     getAll(): Promise<Result<IStudent[], string>>;
 }
 
-export const GetStudent: IGetStudent = {
+export const StudentsDataSource: IGetStudent = {
     async create(student: Omit<IStudent, 'id'>): Promise<Result<IStudent>> {
         try {
-            const { data: { data, error } } = await ApiConfig.post<IApiResponse<IStudent>>('/student', student);
+            const { data: { data, error, message } } = await ApiConfig.post<IApiResponse<IStudent>>('/student', student);
             if (!error) {
                 return { result: data };
             } else {
                 return { error: 'Hove um erro ao cadastrar o aluno!' };
+
             }
         } catch (error) {
-            return { error: 'Hove um erro ao cadastrar o aluno!' }
+            return { error: 'Hove um erro ao cadastrar o aluno!' };
         }
     },
     async update(id: number, student: Omit<IStudent, 'id' | 'ra' | 'cpf'>): Promise<Result<IStudent>> {

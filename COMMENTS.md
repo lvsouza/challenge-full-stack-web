@@ -77,7 +77,16 @@
 
 * Frontend
 
-    * 
+    *Da lista tiro questões de login, e outros afins básicos e obrigatórios para aplicações web*
+    * Os tratamentos para erros no cadastro
+    * A exibição de modais ou snackbar para mensagens de erro
+    * Trataria o carregamento na listagem quando a conexão estiver ruim
+    * Adicionaria feedback visual para ações do usuário que precisassem de loading
+    * Adicionaria mascaras nas inputs para facilitar o entendimento do usuário do que precisa preencher
+    * Pensaria em alguma forma de padronizar o desenvolvimento de telas(para o caso de ter muitas telas)
+    * Melhoraria o suporte ao typescript e tipagens para agilizar o desenvolvimento
+    * Melhoraria o meu(Lucas) conhecimento sobre o framework vue e o vuetify, porque ainda é pouco
+    * Melhoraria a contrução dos componentes do vue para se integrarem melhor com o typecript
 
 ## Quais requisitos obrigatórios que não foram entregues
 

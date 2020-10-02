@@ -1,7 +1,7 @@
 import Vue from "vue"
 import Component from "vue-class-component"
 
-import { GetStudent, IStudent } from '@/services/data-source/'
+import { StudentsDataSource, IStudent } from '@/services/data-source/'
 
 @Component
 export default class StudentsPage extends Vue {
@@ -17,7 +17,7 @@ export default class StudentsPage extends Vue {
     ]
 
     mounted() {
-        GetStudent.getAll()
+        StudentsDataSource.getAll()
             .then(({ error, result }) => {
                 if (error && !result) {
                     alert(error)
@@ -27,6 +27,7 @@ export default class StudentsPage extends Vue {
             })
             .catch(e => {
                 alert(e)
+                this.$router.back()
             })
     }
 
@@ -42,7 +43,7 @@ export default class StudentsPage extends Vue {
     deleteItemConfirm() {
         this.dialogDelete = false
         console.log(this.deleteId)
-        GetStudent.delete(Number(this.deleteId))
+        StudentsDataSource.delete(Number(this.deleteId))
             .then(({ error }) => {
                 if (error) {
                     alert(error)

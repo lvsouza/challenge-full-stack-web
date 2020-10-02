@@ -19,16 +19,31 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Component from "vue-class-component";
 
 import MenuBarComponent from "./components/menu-bar/MenuBarComponent.vue";
 
-export default Vue.extend({
-  name: "App",
+@Component({
   components: {
     MenuBarComponent,
   },
-  data: () => ({
-    drawer: true,
-  }),
-});
+})
+export default class App extends Vue {
+  drawer = this.initializeMenuOpended(this.$vuetify.breakpoint.name);
+
+  initializeMenuOpended(breakpointName: string) {
+    switch (breakpointName) {
+      case "xs":
+        return false;
+      case "sm":
+        return false;
+      case "md":
+        return false;
+      case "lg":
+        return true;
+      case "xl":
+        return true;
+    }
+  }
+}
 </script>
