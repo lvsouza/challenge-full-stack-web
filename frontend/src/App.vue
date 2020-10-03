@@ -29,21 +29,7 @@ import MenuBarComponent from "./components/menu-bar/MenuBarComponent.vue";
   },
 })
 export default class App extends Vue {
-  drawer = this.initializeMenuOpended(this.$vuetify.breakpoint.name);
-
-  initializeMenuOpended(breakpointName: string) {
-    switch (breakpointName) {
-      case "xs":
-        return false;
-      case "sm":
-        return false;
-      case "md":
-        return false;
-      case "lg":
-        return true;
-      case "xl":
-        return true;
-    }
-  }
+  drawer = !this.$vuetify.breakpoint.mdAndDown
 }
 </script>
+  

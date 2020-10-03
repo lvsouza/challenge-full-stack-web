@@ -4,6 +4,7 @@
       <form>
         <validation-provider v-slot="{ errors }" rules="required" name="Name">
           <v-text-field
+            :dense="$vuetify.breakpoint.xs"
             :error-messages="errors"
             v-model="name"
             label="Name"
@@ -18,6 +19,7 @@
           name="Email"
         >
           <v-text-field
+            :dense="$vuetify.breakpoint.xs"
             :error-messages="errors"
             v-model="email"
             label="E-mail"
@@ -33,6 +35,7 @@
         >
           <v-text-field
             :disabled="$route.params.id !== '0'"
+            :dense="$vuetify.breakpoint.xs"
             label="Registro acadêmico"
             :error-messages="errors"
             type="number"
@@ -49,6 +52,7 @@
         >
           <v-text-field
             :disabled="$route.params.id !== '0'"
+            :dense="$vuetify.breakpoint.xs"
             :error-messages="errors"
             v-model="cpf"
             label="Cpf"
@@ -58,12 +62,7 @@
         </validation-provider>
 
         <v-container class="d-flex justify-end">
-          <v-btn
-            class="mr-4"
-            @click="$router.push('/alunos')"
-            elevation="0"
-            text
-          >
+          <v-btn class="mr-4" @click="$router.push('/alunos')" text>
             Cancelar
           </v-btn>
           <v-btn color="primary" @click="submit"> Salvar </v-btn>

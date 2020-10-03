@@ -52,6 +52,7 @@
 ## Lista de bibliotecas de terceiros utilizadas
 
 * Backend
+
     * HttpStatusCode - Usada para facilitar a definição dos status code das respostas da API
     * Compression - Usada para comprimir a resposta da API e reduzir o consumo de banda do servidor
     * Typescript - Superset do javascript, usado para auxiliar a escalabilidade do projeto e a evidar bugs ;)
@@ -72,8 +73,10 @@
 ## O que você melhoraria se tivesse mais tempo
 
 * Backend
+
     * Desenvolvia algumas melhorias na arquitetura e organização do projeto
     * Melhorarias os testes, talvez adicionaria testes de integração
+    * Consultas grandes trazer com paginação
 
 * Frontend
 
@@ -87,6 +90,8 @@
     * Melhoraria o suporte ao typescript e tipagens para agilizar o desenvolvimento
     * Melhoraria o meu(Lucas) conhecimento sobre o framework vue e o vuetify, porque ainda é pouco
     * Melhoraria a contrução dos componentes do vue para se integrarem melhor com o typecript
+    * Adicionaria testes unitário e com o cypress para as telas e componente criados
+    * Melhoraria o processo de busca para realizar a consulta na API e não local
 
 ## Quais requisitos obrigatórios que não foram entregues
 

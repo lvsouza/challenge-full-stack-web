@@ -1,10 +1,33 @@
 <template>
   <v-container>
-    <v-data-table :headers="headers" :items="students" class="elevation-3">
+    <v-data-table
+      :items="seachedStudents"
+      class="elevation-3"
+      :headers="headers"
+    >
       <template v-slot:top>
         <v-toolbar flat>
+          <v-text-field
+            prepend-inner-icon="mdi-magnify"
+            v-model="searchText"
+            placeholder="Buscar por alunos..."
+            hide-details
+            outlined
+            dense
+          ></v-text-field>
+
           <v-spacer />
-          <v-btn color="primary" class="mb-2" link to="/alunos/0">
+
+          <v-btn
+            v-if="$vuetify.breakpoint.xs"
+            color="primary"
+            to="/alunos/0"
+            class="ml-2"
+            link
+          >
+            <v-icon dark> mdi-plus </v-icon>
+          </v-btn>
+          <v-btn v-else color="primary" link to="/alunos/0" class="ml-2">
             Cadastrar aluno
           </v-btn>
         </v-toolbar>
@@ -29,7 +52,14 @@
         </v-card-title>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="blue darken-1" text @click="dialogDelete = false; deleteId = 0">
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="
+              dialogDelete = false;
+              deleteId = 0;
+            "
+          >
             Cancelar
           </v-btn>
           <v-btn color="blue darken-1" text @click="deleteItemConfirm">

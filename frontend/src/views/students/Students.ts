@@ -5,9 +5,10 @@ import { StudentsDataSource, IStudent } from '@/services/data-source/'
 
 @Component
 export default class StudentsPage extends Vue {
-    deleteId: string = '0'
     students: IStudent[] = []
+    deleteId: string = '0'
     dialogDelete = false
+    searchText = ''
 
     headers = [
         { text: "Registro acadêmico", value: "ra" },
@@ -29,6 +30,14 @@ export default class StudentsPage extends Vue {
                 alert(e)
                 this.$router.back()
             })
+    }
+
+    get seachedStudents() {
+        return this.students.filter(student => {
+            if (String(student.ra).toLowerCase().includes(this.searchText.toLowerCase())) return true;
+            else if (student.cpf.toLowerCase().includes(this.searchText.toLowerCase())) return true;
+            else if (student.name.toLowerCase().includes(this.searchText.toLowerCase())) return true;
+        })
     }
 
     edit(id: string) {
