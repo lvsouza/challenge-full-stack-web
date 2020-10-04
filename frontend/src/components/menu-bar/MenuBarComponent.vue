@@ -1,5 +1,9 @@
 <template>
   <v-list dense nav>
+    <v-img contain height="50px" src="./../../assets/grupo-a-logo.png"></v-img>
+
+    <br />
+
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title"> Módulo acadêmico </v-list-item-title>
