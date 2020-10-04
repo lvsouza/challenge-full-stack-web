@@ -5,28 +5,6 @@ import Component from 'vue-class-component'
 
 import { StudentsDataSource } from '@/services/data-source'
 
-setInteractionMode('eager')
-
-extend('required', {
-    ...required,
-    message: '{_field_} não pode estar vazio!',
-})
-
-extend('max', {
-    ...max,
-    message: '{_field_} não pode ser maior que {length} caracteres',
-})
-
-extend('email', {
-    ...email,
-    message: 'Email precisa ser válido',
-})
-
-extend('regex', {
-    ...regex,
-    message: 'Cpf precisa ser válido',
-})
-
 @Component({
     components: {
         ValidationProvider,
@@ -38,6 +16,32 @@ export default class StudentsDetail extends Vue {
     name = ""
     cpf = ""
     ra = ""
+
+    constructor() {
+        super()
+
+        setInteractionMode('eager')
+
+        extend('required', {
+            ...required,
+            message: '{_field_} não pode estar vazio!',
+        })
+
+        extend('max', {
+            ...max,
+            message: '{_field_} não pode ser maior que {length} caracteres',
+        })
+
+        extend('email', {
+            ...email,
+            message: 'Email precisa ser válido',
+        })
+
+        extend('regex', {
+            ...regex,
+            message: 'Cpf precisa ser válido',
+        })
+    }
 
     mounted() {
         if (this.$route.params.id !== '0') {

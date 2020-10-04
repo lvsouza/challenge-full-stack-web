@@ -31,7 +31,20 @@
 
 *  Frontend
 
-    * 
+    * Configurações iniciais e libs
+
+        * Axios
+        * vee-validate
+        * Vuetify
+        * Typescript
+
+    * Cofigurar os padrões de projeto
+
+        * Para view e outras configurações usado padrão do vue
+        * Adicionar os DataSources para padronizar as consultas na API
+    
+    * Criar as páginas principais de consulta e edição
+    * Realizar conexão das telas com as consultas da API
 
 
 ---
@@ -45,9 +58,9 @@
 
 * Frontend
 
-    * 
-
-
+    * Utilizei o vue para a construção da SPA
+    * Utilizei o axios como lib para facilitar a conexão com o backend
+    * A estrutura do projeto está separada por pastas, cada uma com sua responsabilidade
 
 ## Lista de bibliotecas de terceiros utilizadas
 
@@ -66,9 +79,10 @@
 
 * Frontend
 
-    * 
-
-
+    * Axios - Facilita a conexão com o backend
+    * vee-validate - Facilita a validação de formulário
+    * Vuetify - Entrega uma estensa quantidade de componentes de UI para utilização simples, além de toda a configuração de tema, tradução e acessibilidade
+    * Typescript - Auxilia com tipagens e torna mais facila definição de padrões, além de melhorar o intelisens do vscode
 
 ## O que você melhoraria se tivesse mais tempo
 
@@ -100,7 +114,7 @@
 
 * Frontend
 
-    * 
+    * Todos foram entegues 
 
 
  

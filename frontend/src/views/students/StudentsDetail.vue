@@ -10,7 +10,7 @@
             label="Name"
             outlined
             required
-          ></v-text-field>
+          />
         </validation-provider>
 
         <validation-provider
@@ -25,7 +25,7 @@
             label="E-mail"
             outlined
             required
-          ></v-text-field>
+          />
         </validation-provider>
 
         <validation-provider
@@ -42,7 +42,7 @@
             v-model="ra"
             outlined
             required
-          ></v-text-field>
+          />
         </validation-provider>
 
         <validation-provider
@@ -58,7 +58,7 @@
             label="Cpf"
             outlined
             required
-          ></v-text-field>
+          />
         </validation-provider>
 
         <v-container class="d-flex justify-end">

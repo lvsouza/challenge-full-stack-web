@@ -15,7 +15,9 @@
       </v-list-item-icon>
 
       <v-list-item-content>
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
+        <v-list-item-title>
+          {{ item.title }}
+        </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
   </v-list>
@@ -25,7 +27,6 @@
 import Vue from "vue";
 
 export default {
-  components: {},
   data() {
     return {
       items: [
@@ -36,6 +37,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-</style>

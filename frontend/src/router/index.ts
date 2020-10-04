@@ -13,21 +13,21 @@ const routes: Array<RouteConfig> = [
     component: Dashboard,
     meta: {
       title: 'Página inicial',
-    }
+    },
   },
   {
     path: '/alunos',
     component: StudentsPage,
     meta: {
       title: 'Consulta de alunos',
-    }
+    },
   },
   {
     path: '/alunos/:id',
     component: StudentsDetail,
     meta: {
       title: 'Cadastro de aluno',
-    }
+    },
   },
 ];
 
@@ -39,9 +39,9 @@ const router = new VueRouter(
   },
 );
 
-router.beforeEach((to, from, next) => {
-  document.title = to.meta.title + ' - Módulo acadêmico'
-  next()
+router.beforeEach((to, _, next) => {
+  document.title = `${to.meta.title} - Módulo acadêmico`;
+  next();
 });
 
 export default router;

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card class="pa-0" max-width="344" outlined>
-      <v-list-item three-line>
+      <v-list-item two-line>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1"> Alunos </v-list-item-title>
           <v-list-item-subtitle>
@@ -27,9 +27,7 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 
-export default {
-  components: {},
-};
+export default {};
 </script>

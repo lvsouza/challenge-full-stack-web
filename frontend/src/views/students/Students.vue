@@ -10,11 +10,11 @@
           <v-text-field
             prepend-inner-icon="mdi-magnify"
             v-model="searchText"
-            placeholder="Buscar por alunos..."
+            placeholder="Buscar alunos..."
             hide-details
             outlined
             dense
-          ></v-text-field>
+          />
 
           <v-spacer />
 
@@ -45,7 +45,7 @@
 
     <v-dialog v-model="dialogDelete" max-width="400px">
       <v-card>
-        <v-card-title class="">
+        <v-card-title>
           <v-spacer />
           Tem certeza que deseja apagar?
           <v-spacer />
@@ -53,12 +53,12 @@
         <v-card-actions>
           <v-spacer />
           <v-btn
-            color="blue darken-1"
-            text
             @click="
               dialogDelete = false;
               deleteId = 0;
             "
+            color="blue darken-1"
+            text
           >
             Cancelar
           </v-btn>
